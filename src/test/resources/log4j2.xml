@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Properties>
+        <Property name="basepath">./logs</Property>
+    </Properties>
+
+    <!-- Appenders -->
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss:SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+
+        <!-- Rolling File Appender with Timestamped File Names -->
+        <RollingFile name="RollingFile" fileName="${basepath}/application.log"
+                     filePattern="${basepath}/application-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{ISO8601} [%t] %-5p %c - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <!-- Loggers -->
+    <Loggers>
+        <!-- Suppress TestNG internal logs by setting it to ERROR -->
+        <Logger name="org.testng.internal" level="ERROR" />
+
+        <!-- Root logger for your application logs -->
+        <Root level="info"> <!-- Logs from INFO level and above -->
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingFile" />
+        </Root>
+    </Loggers>
+</Configuration>
