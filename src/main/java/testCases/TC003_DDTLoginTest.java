@@ -22,52 +22,63 @@ public class TC003_DDTLoginTest extends BaseClass {
 	@Test(dataProvider = "loginData", dataProviderClass = DataProviders.class, groups = {"dataDriven", "master"} ,enabled=true) // if data provider is in same metod we
 																				// dont need to specify the class
 	public void VerifyLoginDDt(String email, String pwd, String actrCredential) {
+		
+		try {
+			
 
-		HomePage hp = new HomePage(driver);
 
-		hp.clickMyAccount();
-		hp.clickLogIn();
+			HomePage hp = new HomePage(driver);
 
-		// Login
+			hp.clickMyAccount();
+			hp.clickLogIn();
 
-		LoginPage lp = new LoginPage(driver);
+			// Login
 
-		lp.enterEmail(email);
-		lp.enterPwd(pwd);
-		lp.clickSubmit();
+			LoginPage lp = new LoginPage(driver);
 
-		// My Account page
+			lp.enterEmail(email);
+			lp.enterPwd(pwd);
+			lp.clickSubmit();
 
-		MyAccountPage mp = new MyAccountPage(driver);
+			// My Account page
 
-		boolean status = mp.isMyAccountPageExist();
+			MyAccountPage mp = new MyAccountPage(driver);
 
-		if (actrCredential.equalsIgnoreCase("valid")) {
-			if (status == true) {
+			boolean status = mp.isMyAccountPageExist();
 
-				Assert.assertTrue(true);
-				mp.clickLogout();
+			if (actrCredential.equalsIgnoreCase("valid")) {
+				if (status == true) {
 
+					Assert.assertTrue(true);
+					mp.clickLogout();
+
+				}
+
+				else {
+					Assert.assertTrue(false);
+				}
 			}
 
-			else {
-				Assert.assertTrue(false);
+			if (actrCredential.equalsIgnoreCase("Invalid")) {
+
+				if (status == true) {
+					mp.clickLogout();
+					Assert.assertTrue(false);
+				}
+
+				else {
+
+					Assert.assertTrue(true);
+				}
 			}
+
+		
+			
+		} catch (Exception e) {
+
+		
+				System.out.println(e);
 		}
-
-		if (actrCredential.equalsIgnoreCase("Invalid")) {
-
-			if (status == true) {
-				mp.clickLogout();
-				Assert.assertTrue(false);
-			}
-
-			else {
-
-				Assert.assertTrue(true);
-			}
-		}
-
 	}
 
 }

@@ -51,6 +51,7 @@ public class BaseClass {
 
 	@BeforeClass(groups = { "sanity", "regression", "master", "dataDriven" })
 	@Parameters({ "os", "browser" })
+	
 	public void setUp(String os, String br) throws IOException {
 
 		// Loading config.properties fiel
@@ -82,6 +83,7 @@ public class BaseClass {
 		            case "chrome":
 		                ChromeOptions chromeOptions = new ChromeOptions();
 		                chromeOptions.setPlatformName(platform.name());
+		                chromeOptions.addArguments("--headless");
 		                driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
 		                break;
 

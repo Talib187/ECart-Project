@@ -26,11 +26,14 @@ public class LoginPage extends BasePage {
 	@FindBy (xpath = "//*[@type=\"submit\"]")
 	WebElement btnSubmit;
 	
+	@FindBy (xpath = "//a[@class='list-group-item'][normalize-space()='Logout']")
+	WebElement btnLogout;
+	
 	public void clickMyAccount() {
 		linkMyAccount.click();
 	}
 	
-	public void clickLogin() {
+	public void clickLoginBtn() {
 		
 		btnLogin.click();
 	}
@@ -50,5 +53,11 @@ public class LoginPage extends BasePage {
 	public void clickSubmit() {
 		btnSubmit.click();
 	}
+	
+	/*
+	 * public void userLogout() {
+	 * 
+	 * btnLogout.click(); }
+	 */
 	
 }
